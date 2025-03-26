@@ -895,23 +895,27 @@ SOFTWARE.
   background-color: #1a202c !important;
 }
 
-</style>
-
-
-
-
-
-
-
-
-
-
-
-<style>
+        
 html, body {
   height: 100%;
   overflow-y: auto !important;
   -webkit-overflow-scrolling: touch !important;
+}
+
+        /* Light mode alternating styles */
+.alt-light {
+  background-color: #ffffff !important;
+}
+.alt-dark {
+  background-color: #f7fafc !important;
+}
+
+/* Dark mode alternating styles */
+[data-theme="dark"] .alt-light {
+  background-color: #2d3748 !important;
+}
+[data-theme="dark"] .alt-dark {
+  background-color: #1e293b !important;
 }
 
 /* Light mode alternating styling */
@@ -1045,20 +1049,7 @@ li {
   background-color: #1a202c !important;
   color: #cbd5e0 !important;
 }
-</style>
 
-
-
-
-
-
-
-
-
-
-
-
-<style>
 /* Dark mode toggle styles */
 [data-theme="dark"] h3,
 [data-theme="dark"] .form-section h3,
@@ -1110,10 +1101,6 @@ li {
   background-color: #1a202c !important;
 }
 
-</style>
-
-
-<style>
 /* Light mode alternating fallback */
 .alt-light {
   background-color: #ffffff !important;
@@ -4982,14 +4969,22 @@ class FormManager {
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const cards = document.querySelectorAll(".retirement-options .option-card");
-  cards.forEach((card, index) => {
-    if (index % 2 === 0) {
-      card.classList.add("alt-light");
-    } else {
-      card.classList.add("alt-dark");
-    }
-  });
+  const retirementOptions = document.querySelector(".retirement-options");
+  if (retirementOptions) {
+    const observer = new MutationObserver(() => {
+      const cards = retirementOptions.querySelectorAll(".option-card");
+      cards.forEach((card, index) => {
+        card.classList.remove("alt-light", "alt-dark");
+        if (index % 2 === 0) {
+          card.classList.add("alt-light");
+        } else {
+          card.classList.add("alt-dark");
+        }
+      });
+    });
+
+    observer.observe(retirementOptions, { childList: true });
+  }
 });
 </script>
 
