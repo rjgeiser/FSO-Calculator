@@ -1718,7 +1718,47 @@ SOFTWARE.
                 font-size: 16px !important;
             }
         }
-    </style>
+    
+/* Ensure headers and labels are white in dark mode */
+@media (prefers-color-scheme: dark) {
+  .form-section h3,
+  label {
+    color: #ffffff !important;
+  }
+
+  .tabs .tab {
+    background-color: #2d3748 !important;
+    color: #e2e8f0 !important;
+  }
+
+  .tabs .tab.active {
+    background-color: #4a5568 !important;
+    color: #ffffff !important;
+  }
+
+  .report-tab {
+    background-color: #2d3748 !important;
+    color: #e2e8f0 !important;
+  }
+}
+
+/* Light mode: input field contrast improvements */
+.form-section input,
+.form-section select,
+.form-section textarea {
+  background-color: #ffffff !important;
+  border: 2px solid #cbd5e0 !important;
+  color: #1a202c !important;
+}
+
+/* Apply to Advanced Data Entry fields in particular */
+#salary-fields input,
+#salary-fields select,
+#salary-fields textarea {
+  background-color: #ffffff !important;
+}
+
+</style>
 </head>
 <body>
     <div class="container">
@@ -2254,7 +2294,47 @@ SOFTWARE.
                     margin-bottom: 2rem;
                 }
             }
-        </style>
+        
+/* Ensure headers and labels are white in dark mode */
+@media (prefers-color-scheme: dark) {
+  .form-section h3,
+  label {
+    color: #ffffff !important;
+  }
+
+  .tabs .tab {
+    background-color: #2d3748 !important;
+    color: #e2e8f0 !important;
+  }
+
+  .tabs .tab.active {
+    background-color: #4a5568 !important;
+    color: #ffffff !important;
+  }
+
+  .report-tab {
+    background-color: #2d3748 !important;
+    color: #e2e8f0 !important;
+  }
+}
+
+/* Light mode: input field contrast improvements */
+.form-section input,
+.form-section select,
+.form-section textarea {
+  background-color: #ffffff !important;
+  border: 2px solid #cbd5e0 !important;
+  color: #1a202c !important;
+}
+
+/* Apply to Advanced Data Entry fields in particular */
+#salary-fields input,
+#salary-fields select,
+#salary-fields textarea {
+  background-color: #ffffff !important;
+}
+
+</style>
     </div>
 
     <footer>
