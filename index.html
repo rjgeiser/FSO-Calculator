@@ -734,7 +734,21 @@ SOFTWARE.
             }
         }
 
-        /* Dark mode support for better contrast */
+/* Light mode alternating styles */
+.alt-light {
+  background-color: #ffffff !important;
+}
+.alt-dark {
+  background-color: #f7fafc !important;
+}
+
+/* Dark mode alternating styles */
+[data-theme="dark"] .alt-light {
+  background-color: #2d3748 !important;
+}
+[data-theme="dark"] .alt-dark {
+  background-color: #1e293b !important;
+}
         
 /* Enhanced contrast for all notes and footnotes */
 [data-theme="dark"] {
@@ -4819,19 +4833,22 @@ class FormManager {
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const retirementOptions = document.querySelector(".retirement-options");
-  if (!retirementOptions) return;
-
-  function applyAlternating() {
-    const cards = retirementOptions.querySelectorAll(".option-card");
-    cards.forEach((card, index) => {
-      card.classList.remove("alt-light", "alt-dark");
-      if (index % 2 === 0) {
-        card.classList.add("alt-light");
-      } else {
-        card.classList.add("alt-dark");
-      }
+  if (retirementOptions) {
+    const observer = new MutationObserver(() => {
+      const cards = retirementOptions.querySelectorAll(".option-card");
+      cards.forEach((card, index) => {
+        card.classList.remove("alt-light", "alt-dark");
+        if (index % 2 === 0) {
+          card.classList.add("alt-light");
+        } else {
+          card.classList.add("alt-dark");
+        }
+      });
     });
+
+    observer.observe(retirementOptions, { childList: true });
   }
+});
 
   const observer = new MutationObserver(() => {
     applyAlternating();
