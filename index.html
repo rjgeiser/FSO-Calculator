@@ -1801,6 +1801,42 @@ SOFTWARE.
   background-color: #ffffff !important;
 }
 
+
+/* Dark mode: headers, labels, tabs */
+@media (prefers-color-scheme: dark) {
+  h3,
+  .form-section h3,
+  .form-section label {
+    color: #ffffff !important;
+  }
+
+  .tabs .tab,
+  .report-tab {
+    background-color: #2d3748 !important;
+    color: #e2e8f0 !important;
+  }
+
+  .tabs .tab.active {
+    background-color: #4a5568 !important;
+    color: #ffffff !important;
+  }
+}
+
+/* Universal input contrast for all form fields */
+.form-section input,
+.form-section select,
+.form-section textarea,
+#salary-fields input,
+#salary-fields select,
+#salary-fields textarea,
+#salary-fields * input,
+#salary-fields * select,
+#salary-fields * textarea {
+  background-color: #ffffff !important;
+  border: 2px solid #cbd5e0 !important;
+  color: #1a202c !important;
+}
+
 </style>
 </head>
 <body>
@@ -2418,6 +2454,42 @@ SOFTWARE.
 .form-section[data-step="salary"] select,
 .form-section[data-step="salary"] textarea {
   background-color: #ffffff !important;
+}
+
+
+/* Dark mode: headers, labels, tabs */
+@media (prefers-color-scheme: dark) {
+  h3,
+  .form-section h3,
+  .form-section label {
+    color: #ffffff !important;
+  }
+
+  .tabs .tab,
+  .report-tab {
+    background-color: #2d3748 !important;
+    color: #e2e8f0 !important;
+  }
+
+  .tabs .tab.active {
+    background-color: #4a5568 !important;
+    color: #ffffff !important;
+  }
+}
+
+/* Universal input contrast for all form fields */
+.form-section input,
+.form-section select,
+.form-section textarea,
+#salary-fields input,
+#salary-fields select,
+#salary-fields textarea,
+#salary-fields * input,
+#salary-fields * select,
+#salary-fields * textarea {
+  background-color: #ffffff !important;
+  border: 2px solid #cbd5e0 !important;
+  color: #1a202c !important;
 }
 
 </style>
