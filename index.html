@@ -737,7 +737,7 @@ SOFTWARE.
         /* Dark mode support for better contrast */
         
 /* Enhanced contrast for all notes and footnotes */
-@media (prefers-color-scheme: dark) {
+[data-theme="dark"] {
   h3,
   .form-section h3,
   .form-section label {
@@ -811,7 +811,7 @@ SOFTWARE.
 /* Improved report tab readability in dark mode */
 
 /* Enhanced contrast for all notes and footnotes */
-@media (prefers-color-scheme: dark) {
+[data-theme="dark"] {
   h3,
   .form-section h3,
   .form-section label {
@@ -884,6 +884,14 @@ SOFTWARE.
 </style>
 </head>
 <body>
+
+<div style="text-align: right; padding: 1rem;">
+  <label style="font-size: 0.9rem; color: #4a5568;">
+    <input type="checkbox" id="darkModeToggle" />
+    Enable Dark Mode
+  </label>
+</div>
+
     <div class="container">
         <header class="header text-center">
             <h1>Foreign Service Officer Separation Benefits Calculator</h1>
@@ -1421,7 +1429,7 @@ SOFTWARE.
 /* Ensure headers and labels are white in dark mode */
 
 /* Enhanced contrast for all notes and footnotes */
-@media (prefers-color-scheme: dark) {
+[data-theme="dark"] {
   h3,
   .form-section h3,
   .form-section label {
@@ -1495,7 +1503,7 @@ SOFTWARE.
 /* Improved report tab readability in dark mode */
 
 /* Enhanced contrast for all notes and footnotes */
-@media (prefers-color-scheme: dark) {
+[data-theme="dark"] {
   h3,
   .form-section h3,
   .form-section label {
@@ -4688,5 +4696,25 @@ class FormManager {
         // Function to update step dropdown visibility based on grade
     </script>
     <div class="skip-link" tabindex="0">Skip to main content</div>
+
+<script>
+  const toggle = document.getElementById('darkModeToggle');
+  const userPref = localStorage.getItem('fso-darkmode');
+  if (userPref === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    toggle.checked = true;
+  }
+
+  toggle.addEventListener('change', () => {
+    if (toggle.checked) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('fso-darkmode', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('fso-darkmode', 'light');
+    }
+  });
+</script>
+
 </body>
 </html> 
