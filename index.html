@@ -734,7 +734,14 @@ SOFTWARE.
             }
         }
 
-        /* Dark mode support for better contrast */
+/* Dark mode support for better contrast */
+.alt-light { background-color: #ffffff !important; }
+.alt-dark { background-color: #f7fafc !important; }
+
+[data-theme="dark"] .alt-light { background-color: #2d3748 !important; }
+[data-theme="dark"] .alt-dark { background-color: #1e293b !important; }
+
+
         
 /* Enhanced contrast for all notes and footnotes */
 [data-theme="dark"] {
@@ -4971,7 +4978,7 @@ class FormManager {
 document.addEventListener("DOMContentLoaded", function () {
   const retirementOptions = document.querySelector(".retirement-options");
   if (retirementOptions) {
-    const observer = new MutationObserver(() => {
+    const applyAlternating = () => {
       const cards = retirementOptions.querySelectorAll(".option-card");
       cards.forEach((card, index) => {
         card.classList.remove("alt-light", "alt-dark");
@@ -4981,9 +4988,16 @@ document.addEventListener("DOMContentLoaded", function () {
           card.classList.add("alt-dark");
         }
       });
-    });
+    };
 
-    observer.observe(retirementOptions, { childList: true });
+    // Initial call in case cards already present
+    applyAlternating();
+
+    // Watch for dynamically added cards
+    const observer = new MutationObserver(() => {
+      applyAlternating();
+    });
+    observer.observe(retirementOptions, { childList: true, subtree: true });
   }
 });
 </script>
