@@ -149,13 +149,13 @@ class Calculator {
             retirementScenarios.push(this.calculateRegularAnnuity());
         }
         
-        // VERA
-        if (this.isVeraEligible() && this.isTeraOffered) {
+        // VERA - Check independently of TERA
+        if (this.isVeraEligible()) {
             retirementScenarios.push(this.calculateVeraAnnuity());
         }
         
-        // TERA
-        if (this.isTeraEligible() && this.isTeraOffered) {
+        // TERA - Check independently of VERA
+        if (this.isTeraEligible()) {
             retirementScenarios.push(this.calculateTeraAnnuity());
         }
 
@@ -543,14 +543,13 @@ class Calculator {
 
     isVeraEligible() {
         // VERA requires age 43+ AND 15+ years of service
-        return this.earlyRetirementAge >= 43 && this.earlyRetirementYears >= 15;
+        // Only check if VERA/TERA is offered
+        return this.isTeraOffered && this.earlyRetirementAge >= 43 && this.earlyRetirementYears >= 15;
     }
 
     isTeraEligible() {
-        if (!this.isTeraOffered) return false;
-        
-        // TERA requires 15+ years of service
-        return this.yearsOfService >= 15;
+        // TERA requires 15+ years of service and TERA must be offered
+        return this.isTeraOffered && this.yearsOfService >= 15;
     }
 
     getPlanDetails(plan, coverageType) {
