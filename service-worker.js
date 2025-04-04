@@ -5,8 +5,6 @@ const ASSETS_TO_CACHE = [
     '/manifest.json',
     '/css/styles.css',
     '/calculator.js',
-    '/ui.js',
-    '/validation.js',
     '/img/icon-32.png',
     '/img/icon-64.png',
     '/img/icon-128.png',
