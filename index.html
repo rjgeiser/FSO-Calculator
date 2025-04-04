@@ -13,11 +13,11 @@
     <title>FSO Benefits Calculator</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="img/icon-192.png">
+    <link rel="icon" type="image/png" href="./img/icon-192.png">
     
     <!-- PWA Support -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="img/icon-192.png">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="apple-touch-icon" href="./img/icon-192.png">
     
     <!-- Performance Optimization: Preload Critical Resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,7 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
+                navigator.serviceWorker.register('./service-worker.js')
                     .then(registration => {
                     console.log('ServiceWorker registration successful');
                     })
@@ -1674,10 +1674,10 @@
         </footer>
     </div>
 
-    <script src="data.js"></script>
-    <script src="calculator.js"></script>
-    <script src="test-calculator.js"></script>
-    <script src="test-ui.js"></script>
-    <script src="script.js"></script>
+    <script src="./data.js"></script>
+    <script src="./calculator.js"></script>
+    <script src="./test-calculator.js"></script>
+    <script src="./test-ui.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html> 
