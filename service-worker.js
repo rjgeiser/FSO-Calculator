@@ -1,83 +1,77 @@
 const CACHE_NAME = 'fso-calculator-v1';
-const STATIC_CACHE = 'static-v1';
-const DYNAMIC_CACHE = 'dynamic-v1';
-
-const STATIC_ASSETS = [
+const ASSETS_TO_CACHE = [
     '/',
     '/index.html',
     '/manifest.json',
+    '/css/styles.css',
+    '/calculator.js',
+    '/img/icon-32.png',
+    '/img/icon-64.png',
+    '/img/icon-128.png',
     '/img/icon-192.png',
-    '/js/calculator.js',
-    '/js/script.js',
-    '/js/data.js',
-    'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
+    '/img/icon-256.png',
+    '/img/icon-512.png',
+    '/splash/apple-splash-2048-2732.jpg',
+    '/splash/apple-splash-1668-2388.jpg',
+    '/splash/apple-splash-1536-2048.jpg',
+    '/splash/apple-splash-1125-2436.jpg',
+    '/splash/apple-splash-1242-2688.jpg'
 ];
 
-// Install event - cache static assets
-self.addEventListener('install', event => {
+// Install event - cache assets
+self.addEventListener('install', (event) => {
     event.waitUntil(
-        caches.open(STATIC_CACHE)
-            .then(cache => {
-                console.log('Caching static assets');
-                return cache.addAll(STATIC_ASSETS);
-            })
-            .then(() => self.skipWaiting())
-            .catch(error => {
-                console.error('Cache installation failed:', error);
+        caches.open(CACHE_NAME)
+            .then((cache) => {
+                return cache.addAll(ASSETS_TO_CACHE);
             })
     );
 });
 
 // Activate event - clean up old caches
-self.addEventListener('activate', event => {
+self.addEventListener('activate', (event) => {
     event.waitUntil(
-        caches.keys().then(cacheNames => {
+        caches.keys().then((cacheNames) => {
             return Promise.all(
-                cacheNames.map(cacheName => {
-                    if (cacheName !== STATIC_CACHE && cacheName !== DYNAMIC_CACHE) {
-                        console.log('Deleting old cache:', cacheName);
+                cacheNames.map((cacheName) => {
+                    if (cacheName !== CACHE_NAME) {
                         return caches.delete(cacheName);
                     }
                 })
             );
-        }).then(() => self.clients.claim())
+        })
     );
 });
 
-// Fetch event - network first, fallback to cache
-self.addEventListener('fetch', event => {
-    // Skip cross-origin requests
-    if (!event.request.url.startsWith(self.location.origin)) {
-        return;
-    }
-
+// Fetch event - serve from cache, fall back to network
+self.addEventListener('fetch', (event) => {
     event.respondWith(
-        fetch(event.request)
-            .then(response => {
-                // Clone the response
-                const responseClone = response.clone();
-                
-                // Cache the response
-                caches.open(DYNAMIC_CACHE)
-                    .then(cache => {
-                        cache.put(event.request, responseClone);
-                    });
-                
-                return response;
-            })
-            .catch(() => {
-                // If network fails, try cache
-                return caches.match(event.request)
-                    .then(response => {
-                        if (response) {
-                            return response;
-                        }
-                        // If no cache match, return offline fallback
-                        if (event.request.mode === 'navigate') {
-                            return caches.match('/offline.html');
-                        }
-                        return null;
-                    });
+        caches.match(event.request)
+            .then((response) => {
+                // Return cached response if found
+                if (response) {
+                    return response;
+                }
+
+                // Clone the request because it can only be used once
+                const fetchRequest = event.request.clone();
+
+                return fetch(fetchRequest).then((response) => {
+                    // Check if we received a valid response
+                    if (!response || response.status !== 200 || response.type !== 'basic') {
+                        return response;
+                    }
+
+                    // Clone the response because it can only be used once
+                    const responseToCache = response.clone();
+
+                    caches.open(CACHE_NAME)
+                        .then((cache) => {
+                            cache.put(event.request, responseToCache);
+                        });
+
+                    return response;
+                });
             })
     );
 }); 
