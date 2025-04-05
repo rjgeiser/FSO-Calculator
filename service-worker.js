@@ -4,18 +4,16 @@ const ASSETS_TO_CACHE = [
     '/index.html',
     '/manifest.json',
     '/css/styles.css',
-    '/calculator.js',
+    '/js/calculator.js',
+    '/js/ui.js',
+    '/js/validation.js',
     '/img/icon-32.png',
     '/img/icon-64.png',
     '/img/icon-128.png',
     '/img/icon-192.png',
     '/img/icon-256.png',
     '/img/icon-512.png',
-    '/splash/apple-splash-2048-2732.jpg',
-    '/splash/apple-splash-1668-2388.jpg',
-    '/splash/apple-splash-1536-2048.jpg',
-    '/splash/apple-splash-1125-2436.jpg',
-    '/splash/apple-splash-1242-2688.jpg'
+    '/splash/splash.png'
 ];
 
 // Install event - cache assets
