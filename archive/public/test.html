@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retirement Calculator Test</title>
+    <script>
+        // Add error handling for script loading
+        window.onerror = function(msg, url, lineNo, columnNo, error) {
+            console.error('Error: ' + msg + '\nURL: ' + url + '\nLine: ' + lineNo + '\nColumn: ' + columnNo + '\nError object: ' + JSON.stringify(error));
+            return false;
+        };
+    </script>
+    <script src="calculator.js"></script>
+</head>
+<body>
+    <h1>Retirement Calculator Test Results</h1>
+    <div id="results"></div>
+
+    <script>
+        function runTests() {
+            const results = document.getElementById('results');
+            
+            try {
+                // Test Case 1: Regular Retirement Eligible
+                const test1 = new Calculator({
+                    'current-age': '60',
+                    'years-of-service': '25',
+                    'fs-grade': 'FS-03',
+                    'fs-step': '10',
+                    'salary-year-1': '100000',
+                    'salary-year-2': '105000',
+                    'salary-year-3': '110000',
+                    'tera-eligible': 'no'
+                });
+                results.innerHTML += '<h2>Test Case 1 - Regular Retirement Eligible</h2>';
+                results.innerHTML += '<pre>' + JSON.stringify(test1.calculateAnnuity(), null, 2) + '</pre>';
+
+                // Test Case 2: MRA+10 Eligible
+                const test2 = new Calculator({
+                    'current-age': '58',
+                    'years-of-service': '15',
+                    'fs-grade': 'FS-03',
+                    'fs-step': '10',
+                    'salary-year-1': '100000',
+                    'salary-year-2': '105000',
+                    'salary-year-3': '110000',
+                    'tera-eligible': 'no'
+                });
+                results.innerHTML += '<h2>Test Case 2 - MRA+10 Eligible</h2>';
+                results.innerHTML += '<pre>' + JSON.stringify(test2.calculateAnnuity(), null, 2) + '</pre>';
+
+                // Test Case 3: Deferred Eligible
+                const test3 = new Calculator({
+                    'current-age': '45',
+                    'years-of-service': '8',
+                    'fs-grade': 'FS-03',
+                    'fs-step': '10',
+                    'salary-year-1': '100000',
+                    'salary-year-2': '105000',
+                    'salary-year-3': '110000',
+                    'tera-eligible': 'no'
+                });
+                results.innerHTML += '<h2>Test Case 3 - Deferred Eligible</h2>';
+                results.innerHTML += '<pre>' + JSON.stringify(test3.calculateAnnuity(), null, 2) + '</pre>';
+
+                // Test Case 4: VERA Eligible
+                const test4 = new Calculator({
+                    'current-age': '50',
+                    'years-of-service': '20',
+                    'fs-grade': 'FS-03',
+                    'fs-step': '10',
+                    'salary-year-1': '100000',
+                    'salary-year-2': '105000',
+                    'salary-year-3': '110000',
+                    'tera-eligible': 'yes'
+                });
+                results.innerHTML += '<h2>Test Case 4 - VERA Eligible</h2>';
+                results.innerHTML += '<pre>' + JSON.stringify(test4.calculateAnnuity(), null, 2) + '</pre>';
+
+                // Test Case 5: TERA Eligible
+                const test5 = new Calculator({
+                    'current-age': '45',
+                    'years-of-service': '15',
+                    'fs-grade': 'FS-03',
+                    'fs-step': '10',
+                    'salary-year-1': '100000',
+                    'salary-year-2': '105000',
+                    'salary-year-3': '110000',
+                    'tera-eligible': 'yes'
+                });
+                results.innerHTML += '<h2>Test Case 5 - TERA Eligible</h2>';
+                results.innerHTML += '<pre>' + JSON.stringify(test5.calculateAnnuity(), null, 2) + '</pre>';
+            } catch (error) {
+                results.innerHTML += '<div style="color: red;">Error running tests: ' + error.message + '</div>';
+                console.error('Test error:', error);
+            }
+        }
+
+        // Run tests when page loads
+        window.onload = runTests;
+    </script>
+</body>
+</html> 

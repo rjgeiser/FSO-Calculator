@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="192" height="192" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        svg { background-color: #2C3E50; }
+    </style>
+    
+    <!-- Explicit background -->
+    <rect width="100%" height="100%" fill="#2C3E50"/>
+    
+    <defs>
+        <!-- Stone texture -->
+        <filter id="stone-texture">
+            <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" seed="1"/>
+            <feColorMatrix type="saturate" values="0"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.2"/>
+            </feComponentTransfer>
+        </filter>
+        
+        <!-- Engraving shadow -->
+        <filter id="engrave" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="1"/>
+            <feOffset dx="1" dy="1" result="offsetblur"/>
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.7"/>
+            </feComponentTransfer>
+            <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <!-- Base tombstone shape -->
+    <path d="M50 40
+             C50 40 60 30 96 30
+             S142 40 142 40
+             L150 50
+             V160
+             C150 170 140 180 130 180
+             H62
+             C52 180 42 170 42 160
+             V50 Z" 
+          fill="#D6D6D6"/>
+    
+    <!-- Stone texture overlay -->
+    <path d="M50 40
+             C50 40 60 30 96 30
+             S142 40 142 40
+             L150 50
+             V160
+             C150 170 140 180 130 180
+             H62
+             C52 180 42 170 42 160
+             V50 Z" 
+          fill="#E5E5E5"
+          filter="url(#stone-texture)"/>
+    
+    <!-- Cracks -->
+    <path d="M70 60
+             Q75 70 72 80
+             T68 100
+             Q65 110 70 120" 
+          fill="none"
+          stroke="#999999"
+          stroke-width="1"/>
+    
+    <path d="M120 90
+             Q115 100 118 110
+             T122 130" 
+          fill="none"
+          stroke="#999999"
+          stroke-width="1"/>
+    
+    <!-- Small cracks -->
+    <path d="M90 140 L95 150" stroke="#999999" stroke-width="0.5"/>
+    <path d="M100 70 L105 80" stroke="#999999" stroke-width="0.5"/>
+    <path d="M80 110 L85 115" stroke="#999999" stroke-width="0.5"/>
+    
+    <!-- RIF text with deep engraving effect -->
+    <g transform="translate(96, 110)" text-anchor="middle">
+        <!-- Deep shadow -->
+        <text x="2" 
+              y="2" 
+              font-family="Georgia, serif" 
+              font-size="42" 
+              font-weight="bold" 
+              fill="#666666">RIF</text>
+        
+        <!-- Medium shadow -->
+        <text x="1" 
+              y="1" 
+              font-family="Georgia, serif" 
+              font-size="42" 
+              font-weight="bold" 
+              fill="#888888">RIF</text>
+        
+        <!-- Main text -->
+        <text x="0" 
+              y="0" 
+              font-family="Georgia, serif" 
+              font-size="42" 
+              font-weight="bold" 
+              fill="#333333">RIF</text>
+    </g>
+</svg> 
